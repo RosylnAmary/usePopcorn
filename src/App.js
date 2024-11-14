@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
 import StarRating from "./StarRating";
 import { useMovies } from "./usedMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
@@ -26,7 +25,6 @@ export default function App() {
 
 	function handleAddWatched(movie) {
 		setWatched((watched) => [...watched, movie]);
-		// localStorage.setItem("watched", JSON.stringify([...watched, movies]));
 	}
 
 	function handleDeleteWatched(id) {
@@ -43,7 +41,6 @@ export default function App() {
 			<Main>
 				<Box>
 					{isLoading && <Loader />}
-					{/* {isLoading ? <Loader /> : <MovieList movies={movies} />} */}
 					{!isLoading && !error && (
 						<MovieList movies={movies} onSelectMovie={handleSelectMovie} />
 					)}
@@ -147,27 +144,6 @@ function Box({ children }) {
 	);
 }
 
-// function Watched() {
-//
-// 	const [isOpen2, setIsOpen2] = useState(true);
-
-// 	return (
-// 		<div className="box">
-// 			<button
-// 				className="btn-toggle"
-// 				onClick={() => setIsOpen2((open) => !open)}
-// 			>
-// 				{isOpen2 ? "–" : "+"}
-// 			</button>
-// 			{isOpen2 && (
-// 				<>
-//
-// 				</>
-// 			)}
-// 		</div>
-// 	);
-// }
-
 function MovieList({ movies, onSelectMovie }) {
 	return (
 		<ul className="list list-movies">
@@ -268,10 +244,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 		Genre: genre,
 	} = movie;
 
-	const isTop = imdbRating > 8;
-
-	// const [avgRating, setAvgRating] = useState(0);
-
 	function handleAdd() {
 		const newWatchedMovie = {
 			imdbID: selectedId,
@@ -285,9 +257,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 		};
 		onAddWatched(newWatchedMovie);
 		onCloseMovie();
-
-		// setAvgRating(Number(imdbRating));
-		// setAvgRating((avgRating) => (avgRating + userRating) / 2);
 	}
 
 	useEffect(
@@ -344,7 +313,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 						</div>
 					</header>
 					<section>
-						{/* <p>{avgRating}</p> */}
 						<div className="rating">
 							{!isWatched ? (
 								<>

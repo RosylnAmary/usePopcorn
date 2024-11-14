@@ -9,9 +9,6 @@ export function useMovies(query) {
 
 	useEffect(
 		function () {
-			// callback?.();
-
-			// The AbortController interface is built into modern browsers and provides a simple mechanism to abort asynchronous tasks.
 			const controller = new AbortController();
 
 			async function fetchMovies() {
